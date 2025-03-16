@@ -1,0 +1,29 @@
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+
+venv/
+
+
+# Node
+node_modules/
+dist/
+.npm
+.eslintcache
+
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build files
+/build/
+/out/
+
+# Misc
+.DS_Store
+Thumbs.db

@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  personapi:
+    build: ./personapi
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=0
+      - SECRET_KEY=production-secret-key
+      - CORS_WHITELIST=http://localhost,http://frontend
+      - DJANGO_SUPERUSER_PASSWORD=ashraf123
+    volumes:
+      - db-data:/app/db # Changed to directory mount
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/persons/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_API_URL=http://personapi:8000/api
+    depends_on:
+      personapi:
+        condition: service_healthy
+
+volumes:
+  db-data:

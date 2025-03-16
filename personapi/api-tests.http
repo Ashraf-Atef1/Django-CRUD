@@ -1,0 +1,42 @@
+### Get all persons
+GET http://localhost:8000/api/persons/
+
+### Filter persons
+GET http://localhost:8000/api/persons/?filter=New
+
+### Get JWT Token
+POST http://localhost:8000/api/token/
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "12345"
+}
+### Create person with authentication
+POST http://localhost:8000/api/persons/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyMTYwNjYyLCJpYXQiOjE3NDIxNTcwNjIsImp0aSI6ImM1MGFhOGVkMGJhNzRmZTJhZjYwMmRmNDkxOTc1ZDE3IiwidXNlcl9pZCI6MX0.ei37ivemsg3uzNccYDLDUxZPo8oPSCo9qgQRuZX_HwI
+
+{
+    "name": "John Doe",
+    "age": 30,
+    "city": "New York",
+    "email": "joha@example.com",
+    "phone": "+12345567890"
+}
+
+### Update person (replace {id} with actual ID)
+PUT http://localhost:8000/api/persons/3/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyMTYwNjYyLCJpYXQiOjE3NDIxNTcwNjIsImp0aSI6ImM1MGFhOGVkMGJhNzRmZTJhZjYwMmRmNDkxOTc1ZDE3IiwidXNlcl9pZCI6MX0.ei37ivemsg3uzNccYDLDUxZPo8oPSCo9qgQRuZX_HwI
+Content-Type: application/json
+
+{
+    "name": "John Updated",
+    "age": 31,
+    "city": "Boston",
+    "email": "john.new@example.com",
+    "phone": "+1234567891"
+}
+
+### Delete person
+DELETE http://localhost:8000/api/persons/2/
