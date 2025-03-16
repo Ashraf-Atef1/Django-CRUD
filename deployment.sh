@@ -1,18 +1,20 @@
 #!/bin/bash
 
+sudo apt install python3 python3-pip npm -y
+
 # Personapi Setup
 echo "Setting up personapi..."
 cd personapi
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-python manage.py migrate
+python3 manage.py migrate
 
 # Cleanup existing admin user
-python manage.py shell -c "from django.contrib.auth.models import User; User.objects.filter(username='admin', is_superuser=True).delete()"
+python3 manage.py shell -c "from django.contrib.auth.models import User; User.objects.filter(username='admin', is_superuser=True).delete()"
 
 # Create superuser with proper password
-python manage.py shell <<EOF
+python3 manage.py shell <<EOF
 from django.contrib.auth import get_user_model
 User = get_user_model()
 admin = User.objects.create_superuser(
@@ -29,7 +31,7 @@ sudo lsof -t -i tcp:8000 | xargs kill -9
 echo "Creating initial data..."
 source venv/bin/activate
 
-python manage.py shell <<EOF
+python3 manage.py shell <<EOF
 from django.contrib.auth import get_user_model
 from people.models import Person
 
@@ -60,11 +62,14 @@ print("Sample data created successfully")
 EOF
 echo "Data setup complete!"
 
-python manage.py runserver &
+python3 manage.py runserver &
 cd ..
 
 # Frontend Setup
+# Kill existing server if running
 echo "Setting up frontend..."
+
+sudo lsof -t -i tcp:3000 | xargs kill -9
 cd frontend
 npm install
 npm run build
