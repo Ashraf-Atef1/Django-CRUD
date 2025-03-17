@@ -83,9 +83,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CORS_ORIGIN_WHITELIST = os.environ.get('CORS_WHITELIST', "http://localhost:5173").split(',')
+# CORS_ORIGIN_WHITELIST = os.environ.get('CORS_WHITELIST', "http://localhost:5173").split(',')
 ROOT_URLCONF = 'personapi.urls'
-
+CORS_ORIGIN_ALLOW_ALL = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
