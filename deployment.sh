@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install python3 python3-pip npm -y
+sudo apt install python3 python3-pip npm python3.12-venv -y
 
 # Personapi Setup
 echo "Setting up personapi..."
@@ -62,7 +62,7 @@ print("Sample data created successfully")
 EOF
 echo "Data setup complete!"
 
-python3 manage.py runserver &
+python3 manage.py runserver 0.0.0.0:8000 &
 cd ..
 
 # Frontend Setup
